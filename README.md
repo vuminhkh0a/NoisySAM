@@ -50,11 +50,11 @@ The segmentation models are prompted using sampled points extracted from the gro
 
 Point selection strategy:
 
-1. Split the original segmentation mask into binary masks corresponding to each class in the image.
-2. Extract all pixel coordinates belonging to the current binary mask.
-3. Compute the centroid of the mask by averaging the x and y coordinates.
-4. Use the centroid as the primary prompt point.
-5. Randomly sample additional points from the same mask region to form the remaining prompts.
+1. Split the original segmentation mask into binary masks for each class in the image.
+2. For each binary mask, apply connected component labeling to identify individual regions.
+3. For each connected region, compute the Euclidean distance transform, which measures the distance of each foreground pixel to the nearest boundary pixel.
+4. Select the pixel with the maximum distance value (i.e., the pixel farthest from the boundary) as the representative prompt point for that region.
+5. Store the coordinates of this pixel as the sampled point.
 
 Example implementation:
 

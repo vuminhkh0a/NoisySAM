@@ -59,22 +59,14 @@ Point selection strategy:
 Example implementation:
 
 ```python
-def sample_points(mask, n_points=5):
-    ys, xs = np.where(mask)
-
-    if len(xs) == 0:
-        return None
-
+def sample_points(mask):
+    labeled_mask, num_regions = ndimage.label(mask)
     points = []
-
-    cx = int(xs.mean())
-    cy = int(ys.mean())
-    points.append([cx, cy])
-
-    if len(xs) > n_points:
-        idx = np.random.choice(len(xs), n_points-1, replace=False)
-        for i in idx:
-            points.append([xs[i], ys[i]])
+    for region_id in range(1, num_regions + 1):
+        region = labeled_mask == region_id
+        dist = ndimage.distance_transform_edt(region)
+        cy, cx = np.unravel_index(np.argmax(dist), dist.shape)
+        points.append([cx, cy])
 
     return np.array(points)
 ```

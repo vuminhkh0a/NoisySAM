@@ -90,6 +90,7 @@ def cutmix(x1, y1, x2, y2, alpha=1.0):
     lam = 1 - ((x2_ - x1_) * (y2_ - y1_) / (H * W))
 
     return x, y, lam
+    
 def cutout(x, y, ratio=0.4, fill_value=0, ignore_label=255):
     H, W, C = x.shape
 

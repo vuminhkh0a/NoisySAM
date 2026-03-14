@@ -1,14 +1,2 @@
-/checkpoints
-/mobile_sam
-/mobilesamv2
-/sam2
-/segment-anything
-/data/BSDS500
-/data/stanford-bg
-/data/VOC2012/Annotations
-/data/VOC2012/ImageSets/Layout
-/data/VOC2012/ImageSets/Action
-/data/VOC2012/ImageSets/Main
-/data/VOC2012/ImageSets/Segmentation
-/data/VOC2012/ImageSets
-/data/VOC2012/SegmentationObject
+*
+!demo.ipynb

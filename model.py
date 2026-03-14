@@ -18,7 +18,7 @@ def get_predictor(models, device):
             sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
             sam.to(device=device)
 
-            predictors[name]  = SamPredictor(sam)
+            predictors[name] = SamPredictor(sam)
             
         elif name == "sam2_h":
 
@@ -27,7 +27,7 @@ def get_predictor(models, device):
 
             sam2_model = build_sam2(model_cfg, sam2_checkpoint, device=device)
 
-            predictors[name]  = SAM2ImagePredictor(sam2_model)
+            predictors[name] = SAM2ImagePredictor(sam2_model)
 
         elif name == "mobile_sam":
             sam_checkpoint = "./checkpoints/mobile_sam.pt"
@@ -37,6 +37,6 @@ def get_predictor(models, device):
             sam.to(device=device)
             sam.eval()
 
-            predictors[name]  = SamPredictor(sam)
+            predictors[name] = SamPredictor(sam)
 
     return predictors

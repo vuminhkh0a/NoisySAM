@@ -48,17 +48,15 @@ def split_masks(y):
 
     return masks
 
-def sample_points(mask, n_points=5):
-    ys, xs = np.where(mask)
-
-    if len(xs) == 0:
-        return None
-
+def sample_points(mask):
+    labeled_mask, num_regions = ndimage.label(mask)
     points = []
-
-    cx = int(xs.mean())
-    cy = int(ys.mean())
-    points.append([cx, cy])
+    for region_id in range(1, num_regions + 1):
+        region = labeled_mask == region_id
+        dist = ndimage.distance_transform_edt(region)
+        cy, cx = np.unravel_index(np.argmax(dist), dist.shape)
+        points.append([cx, cy])
+    return np.array(points)
 
     if len(xs) > n_points:
         idx = np.random.choice(len(xs), n_points-1, replace=False)
@@ -94,7 +92,7 @@ def evaluate_sam(image, gt_mask, predictor):
 
     for mask in masks:
 
-        points = sample_points(mask, n_points=5)
+        points = sample_points(mask)
 
         if points is None:
             continue
@@ -126,7 +124,7 @@ def main():
 
     start_time = time.time()
 
-    DEVICE = "cuda:3"
+    DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
     predictors = get_predictor(MODELS, DEVICE)
 

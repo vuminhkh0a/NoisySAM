@@ -126,7 +126,6 @@ def main():
 
     start_time = time.time()
 
-    NUM_SAMPLES = 1
     DEVICE = "cuda:3"
 
     predictors = get_predictor(MODELS, DEVICE)
@@ -146,7 +145,7 @@ def main():
                 mprecision_list = []
                 mrecall_list = []
 
-                for i in range(NUM_SAMPLES):
+                for i in range(len(x)):
 
                     image = cv2.imread(x[i])
 

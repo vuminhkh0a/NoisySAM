@@ -44,13 +44,6 @@ Various perturbations are applied to the input images using Albumentations:
 ### Image Enhancement
 - Sharpen
 
-### Mixed-image Augmentations
-Additional perturbations include:
-
-- **MixUp**
-- **CutMix**
-- **CutOut**
-
 These operations simulate partial occlusion, mixed visual content, and information loss.
 
 ## Inference Strategy
@@ -108,9 +101,13 @@ Future experiments will also include more complex and large-scale datasets:
 
 These datasets introduce more diverse scenes, object categories, and challenging segmentation scenarios, enabling a more comprehensive robustness benchmark.
 
+### Additional perturbations
+- **MixUp**
+- **CutMix**
+- **CutOut**
+
 ### Other Planned Improvements
 
-- More realistic noise and corruption benchmarks
-- Better prompt strategies for point-based segmentation models
-- Evaluation under varying object sizes and fragmented regions
+- Testing on medical benchmark dataset using medical foundation models such as MedSAM
+- Using other prompt strateges such box or text
 - Visualization tools for prediction comparison across models

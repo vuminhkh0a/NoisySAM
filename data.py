@@ -6,9 +6,9 @@ import numpy as np
 import os
 
 IMAGE_SIZE = 256
-VOC_PATH = '/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/data/VOC2012'
-BSDS500_PATH = '/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/data/BSDS500'
-SB_PATH = '/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/data/stanford-bg'
+VOC_PATH = './data/VOC2012'
+BSDS500_PATH = './data/BSDS500'
+SB_PATH = './data/stanford-bg'
 
 
 class Custom_Dataset(Dataset):
@@ -38,17 +38,17 @@ def get_VOC2012():
     img_path_lst = []
     mask_path_lst = []
 
-    with open('/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/data/VOC2012/ImageSets/Segmentation/train.txt', 'r') as f:
+    with open('./data/VOC2012/ImageSets/Segmentation/train.txt', 'r') as f:
         for line in f:
             img_path_lst.append(line.strip() + '.jpg')
             mask_path_lst.append(line.strip() + '.png')
 
-    with open('/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/data/VOC2012/ImageSets/Segmentation/trainval.txt', 'r') as f:
+    with open('./data/VOC2012/ImageSets/Segmentation/trainval.txt', 'r') as f:
         for line in f:
             img_path_lst.append(line.strip() + '.jpg')
             mask_path_lst.append(line.strip() + '.png')
 
-    with open('/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/data/VOC2012/ImageSets/Segmentation/val.txt', 'r') as f:
+    with open('./data/VOC2012/ImageSets/Segmentation/val.txt', 'r') as f:
         for line in f:
             img_path_lst.append(line.strip() + '.jpg')
             mask_path_lst.append(line.strip() + '.png')

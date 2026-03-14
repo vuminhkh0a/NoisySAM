@@ -44,8 +44,6 @@ Various perturbations are applied to the input images using Albumentations:
 ### Image Enhancement
 - Sharpen
 
-These operations simulate partial occlusion, mixed visual content, and information loss.
-
 ## Inference Strategy
 
 The segmentation models are prompted using sampled points extracted from the ground-truth mask.

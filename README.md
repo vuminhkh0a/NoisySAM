@@ -50,10 +50,11 @@ The segmentation models are prompted using sampled points extracted from the gro
 
 Point selection strategy:
 
-1. Compute the centroid of each connected region.
-2. Select the centroid as the primary prompt point.
-3. Randomly sample additional points from the region.
-4. If multiple disconnected regions exist, points are sampled from each region.
+1. Split the original segmentation mask into binary masks corresponding to each class in the image.
+2. Extract all pixel coordinates belonging to the current binary mask.
+3. Compute the centroid of the mask by averaging the x and y coordinates.
+4. Use the centroid as the primary prompt point.
+5. Randomly sample additional points from the same mask region to form the remaining prompts.
 
 Example implementation:
 

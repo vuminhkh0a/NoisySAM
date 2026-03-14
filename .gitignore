@@ -4,4 +4,5 @@
 /sam2
 /segment-anything
 /data/BSDS500
-/data/VOC2012
+/data/stanford-bg
+/data/VOC2012/JPEGImages

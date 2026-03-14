@@ -1,4 +1,4 @@
-# NoisySAM - Foundation Model Robustness for Image Segmentation [Ongoing]
+# NoisySAM - Foundation Model Robustness under perturbations for Natural Image Segmentation [Ongoing]
 
 This project evaluates the robustness of foundation segmentation models under different types of noise and image perturbations.
 

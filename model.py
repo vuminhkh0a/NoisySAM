@@ -12,7 +12,7 @@ def get_predictor(models, device="cuda"):
 
         if name == "sam_h":
 
-            sam_checkpoint = "/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/checkpoints/sam_vit_h_4b8939.pth"
+            sam_checkpoint = "./checkpoints/sam_vit_h_4b8939.pth"
             model_type = "vit_h"
 
             sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
@@ -22,7 +22,7 @@ def get_predictor(models, device="cuda"):
             
         elif name == "sam2_h":
 
-            sam2_checkpoint = "../checkpoints/sam2.1_hiera_large.pt"
+            sam2_checkpoint = "./checkpoints/sam2.1_hiera_large.pt"
             model_cfg = "configs/sam2.1/sam2.1_hiera_l.yaml"
 
             sam2_model = build_sam2(model_cfg, sam2_checkpoint, device=device)
@@ -30,7 +30,7 @@ def get_predictor(models, device="cuda"):
             predictors[name]  = SAM2ImagePredictor(sam2_model)
 
         elif name == "mobile_sam":
-            sam_checkpoint = "/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/checkpoints/mobile_sam.pt"
+            sam_checkpoint = "./checkpoints/mobile_sam.pt"
             model_type = "vit_t"
 
             sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)

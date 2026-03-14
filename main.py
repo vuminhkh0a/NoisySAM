@@ -56,12 +56,6 @@ def sample_points(mask):
         dist = ndimage.distance_transform_edt(region)
         cy, cx = np.unravel_index(np.argmax(dist), dist.shape)
         points.append([cx, cy])
-    return np.array(points)
-
-    if len(xs) > n_points:
-        idx = np.random.choice(len(xs), n_points-1, replace=False)
-        for i in idx:
-            points.append([xs[i], ys[i]])
 
     return np.array(points)
 

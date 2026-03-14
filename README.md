@@ -85,3 +85,32 @@ def sample_points(mask, n_points=5):
             points.append([xs[i], ys[i]])
 
     return np.array(points)
+```
+
+## Future Extensions
+
+### Additional Models
+
+The following segmentation foundation models are planned to be integrated:
+
+- SAM3
+- MobileSAMv2
+- FastSAM
+
+These models will be evaluated under the same noise and perturbation settings to provide a consistent robustness comparison.
+
+### Additional Datasets
+
+Future experiments will also include more complex and large-scale datasets:
+
+- COCO
+- Cityscapes
+
+These datasets introduce more diverse scenes, object categories, and challenging segmentation scenarios, enabling a more comprehensive robustness benchmark.
+
+### Other Planned Improvements
+
+- More realistic noise and corruption benchmarks
+- Better prompt strategies for point-based segmentation models
+- Evaluation under varying object sizes and fragmented regions
+- Visualization tools for prediction comparison across models

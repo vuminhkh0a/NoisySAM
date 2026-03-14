@@ -10,9 +10,11 @@ from metrics import *
 from noise import *
 from model import *
 
+import warnings
+warnings.simplefilter("ignore")
 
-DEVICE = "cuda:2"
 
+DEVICE = "cuda:2" if torch.cuda.is_available() else "cpu"
 
 DATASETS = [
     "VOC2012",
@@ -80,30 +82,19 @@ def evaluate_sam(image, gt_mask, predictor):
     dices = []
     precisions = []
     recalls = []
+    with torch.no_grad():
+        predictor.set_image(image)
 
-    preds = []
+        for mask in masks:
 
-    predictor.set_image(image)
+            points = sample_points(mask)
+            pred = sam_predict_mask(predictor, image, points)
+            metrics = compute_metrics(pred, mask)
 
-    for mask in masks:
-
-        points = sample_points(mask)
-
-        if points is None:
-            continue
-
-        pred = sam_predict_mask(predictor, image, points)
-        preds.append(pred)
-
-        metrics = compute_metrics(pred, mask)
-
-        ious.append(metrics["iou"])
-        dices.append(metrics["dice"])
-        precisions.append(metrics["precision"])
-        recalls.append(metrics["recall"])
-
-    if len(ious) == 0:
-        return None
+            ious.append(metrics["iou"])
+            dices.append(metrics["dice"])
+            precisions.append(metrics["precision"])
+            recalls.append(metrics["recall"])
 
     mean_metrics = {
         "miou": np.mean(ious),
@@ -112,14 +103,12 @@ def evaluate_sam(image, gt_mask, predictor):
         "mrecall": np.mean(recalls)
     }
 
-    return mean_metrics, preds, masks
+    return mean_metrics
 
 
 def main():
 
     start_time = time.time()
-
-    DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
     predictors = get_predictor(MODELS, DEVICE)
 
@@ -138,7 +127,8 @@ def main():
                 mprecision_list = []
                 mrecall_list = []
 
-                for i in range(len(x)):
+                # for i in range(len(x)):
+                for i in range(1):
 
                     image = cv2.imread(x[i])
 
@@ -162,7 +152,7 @@ def main():
                     if result is None:
                         continue
 
-                    metrics, preds, masks = result
+                    metrics = result
 
                     miou_list.append(metrics["miou"])
                     mdice_list.append(metrics["mdice"])
@@ -179,6 +169,8 @@ def main():
                 print(
                     f"Noise: {noise_name} | Model: {model_name} | Dataset: {dataset_name} | {results}"
                 )
+
+                torch.cuda.empty_cache()
         print('\n')
 
     end_time = time.time()

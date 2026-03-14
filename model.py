@@ -4,7 +4,7 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 from mobile_sam import sam_model_registry, SamPredictor
 
 
-def get_predictor(models, device="cuda"):
+def get_predictor(models, device):
 
     predictors = {}
 

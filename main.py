@@ -127,8 +127,8 @@ def main():
                 mprecision_list = []
                 mrecall_list = []
 
-                for i in range(len(x)):
-                # for i in range(1):
+                # for i in range(len(x)):
+                for i in range(50):
 
                     image = cv2.imread(x[i])
 

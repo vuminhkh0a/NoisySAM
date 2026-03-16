@@ -15,3 +15,104 @@ nohup: ignoring input
   return register_model(fn_wrapper)
 /mnt/nvme0/home/utbt/KhoaVM/NoisySAM/mobile_sam/modeling/tiny_vit_sam.py:656: UserWarning: Overwriting tiny_vit_21m_512 in registry with mobile_sam.modeling.tiny_vit_sam.tiny_vit_21m_512. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
   return register_model(fn_wrapper)
+Noise: none | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.4023, 'Dice': 0.482, 'Precision': 0.7171, 'Recall': 0.4742}
+Noise: none | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.41, 'Dice': 0.4767, 'Precision': 0.6467, 'Recall': 0.6618}
+Noise: none | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5855, 'Dice': 0.6686, 'Precision': 0.8157, 'Recall': 0.7104}
+Noise: none | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.4517, 'Dice': 0.5148, 'Precision': 0.6842, 'Recall': 0.5317}
+Noise: none | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.409, 'Dice': 0.4736, 'Precision': 0.6474, 'Recall': 0.6841}
+Noise: none | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5608, 'Dice': 0.6309, 'Precision': 0.8386, 'Recall': 0.6474}
+Noise: none | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.414, 'Dice': 0.5036, 'Precision': 0.647, 'Recall': 0.5321}
+Noise: none | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.433, 'Dice': 0.5009, 'Precision': 0.603, 'Recall': 0.7522}
+Noise: none | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.6011, 'Dice': 0.6853, 'Precision': 0.7696, 'Recall': 0.7629}
+
+
+Noise: flip | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.3917, 'Dice': 0.4813, 'Precision': 0.6868, 'Recall': 0.4782}
+Noise: flip | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.4293, 'Dice': 0.5022, 'Precision': 0.626, 'Recall': 0.7156}
+Noise: flip | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5399, 'Dice': 0.6284, 'Precision': 0.7491, 'Recall': 0.7245}
+Noise: flip | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.4282, 'Dice': 0.4963, 'Precision': 0.6368, 'Recall': 0.5465}
+Noise: flip | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.4188, 'Dice': 0.4841, 'Precision': 0.6296, 'Recall': 0.7193}
+Noise: flip | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5506, 'Dice': 0.6293, 'Precision': 0.7956, 'Recall': 0.6763}
+Noise: flip | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.4109, 'Dice': 0.5102, 'Precision': 0.6655, 'Recall': 0.5404}
+Noise: flip | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4243, 'Dice': 0.494, 'Precision': 0.5635, 'Recall': 0.7987}
+Noise: flip | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.5517, 'Dice': 0.6458, 'Precision': 0.6654, 'Recall': 0.8311}
+
+
+Noise: rotation | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.3876, 'Dice': 0.4768, 'Precision': 0.6504, 'Recall': 0.5229}
+Noise: rotation | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.4976, 'Dice': 0.5647, 'Precision': 0.5908, 'Recall': 0.8274}
+Noise: rotation | Model: sam_h | Dataset: stanford-background | {'Iou': 0.6135, 'Dice': 0.694, 'Precision': 0.7133, 'Recall': 0.8556}
+Noise: rotation | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.3697, 'Dice': 0.4386, 'Precision': 0.5646, 'Recall': 0.5049}
+Noise: rotation | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.4261, 'Dice': 0.4923, 'Precision': 0.5278, 'Recall': 0.7271}
+Noise: rotation | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5211, 'Dice': 0.5911, 'Precision': 0.6716, 'Recall': 0.634}
+Noise: rotation | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.3478, 'Dice': 0.4398, 'Precision': 0.5957, 'Recall': 0.5235}
+Noise: rotation | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4399, 'Dice': 0.5141, 'Precision': 0.507, 'Recall': 0.8708}
+Noise: rotation | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.5288, 'Dice': 0.6244, 'Precision': 0.5906, 'Recall': 0.8884}
+
+
+Noise: scale | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.416, 'Dice': 0.4952, 'Precision': 0.7073, 'Recall': 0.4849}
+Noise: scale | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.4069, 'Dice': 0.4737, 'Precision': 0.6421, 'Recall': 0.6687}
+Noise: scale | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5985, 'Dice': 0.6814, 'Precision': 0.8148, 'Recall': 0.7241}
+Noise: scale | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.4476, 'Dice': 0.515, 'Precision': 0.6864, 'Recall': 0.5347}
+Noise: scale | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.4158, 'Dice': 0.4814, 'Precision': 0.6495, 'Recall': 0.676}
+Noise: scale | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5819, 'Dice': 0.6565, 'Precision': 0.8457, 'Recall': 0.6716}
+Noise: scale | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.4142, 'Dice': 0.5061, 'Precision': 0.6632, 'Recall': 0.521}
+Noise: scale | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4319, 'Dice': 0.5016, 'Precision': 0.5979, 'Recall': 0.754}
+Noise: scale | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.6023, 'Dice': 0.6853, 'Precision': 0.77, 'Recall': 0.7654}
+
+
+Noise: noise injection | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.3494, 'Dice': 0.4486, 'Precision': 0.5999, 'Recall': 0.5561}
+Noise: noise injection | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.3767, 'Dice': 0.4508, 'Precision': 0.5257, 'Recall': 0.7795}
+Noise: noise injection | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5268, 'Dice': 0.6214, 'Precision': 0.6541, 'Recall': 0.825}
+Noise: noise injection | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.3533, 'Dice': 0.4474, 'Precision': 0.5987, 'Recall': 0.5424}
+Noise: noise injection | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.3516, 'Dice': 0.4234, 'Precision': 0.5723, 'Recall': 0.7258}
+Noise: noise injection | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.482, 'Dice': 0.5758, 'Precision': 0.684, 'Recall': 0.7468}
+Noise: noise injection | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.3288, 'Dice': 0.4313, 'Precision': 0.5099, 'Recall': 0.6405}
+Noise: noise injection | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.3355, 'Dice': 0.4094, 'Precision': 0.4173, 'Recall': 0.8658}
+Noise: noise injection | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.4914, 'Dice': 0.5897, 'Precision': 0.5564, 'Recall': 0.8893}
+
+
+Noise: color | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.403, 'Dice': 0.4838, 'Precision': 0.7177, 'Recall': 0.4766}
+Noise: color | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.4128, 'Dice': 0.4797, 'Precision': 0.6446, 'Recall': 0.6679}
+Noise: color | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5764, 'Dice': 0.6606, 'Precision': 0.8076, 'Recall': 0.7114}
+Noise: color | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.4534, 'Dice': 0.5173, 'Precision': 0.6774, 'Recall': 0.5371}
+Noise: color | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.4116, 'Dice': 0.4754, 'Precision': 0.6435, 'Recall': 0.6904}
+Noise: color | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5794, 'Dice': 0.6548, 'Precision': 0.8423, 'Recall': 0.6683}
+Noise: color | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.4111, 'Dice': 0.5014, 'Precision': 0.6438, 'Recall': 0.5306}
+Noise: color | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4347, 'Dice': 0.5032, 'Precision': 0.6033, 'Recall': 0.7568}
+Noise: color | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.5883, 'Dice': 0.6735, 'Precision': 0.7581, 'Recall': 0.7569}
+
+
+Noise: contrast | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.4065, 'Dice': 0.4871, 'Precision': 0.7145, 'Recall': 0.4814}
+Noise: contrast | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.4038, 'Dice': 0.4704, 'Precision': 0.6397, 'Recall': 0.6638}
+Noise: contrast | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5856, 'Dice': 0.6677, 'Precision': 0.811, 'Recall': 0.7176}
+Noise: contrast | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.461, 'Dice': 0.5243, 'Precision': 0.6649, 'Recall': 0.5464}
+Noise: contrast | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.4034, 'Dice': 0.4663, 'Precision': 0.646, 'Recall': 0.6794}
+Noise: contrast | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5656, 'Dice': 0.6365, 'Precision': 0.8373, 'Recall': 0.6526}
+Noise: contrast | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.4153, 'Dice': 0.5063, 'Precision': 0.6463, 'Recall': 0.5359}
+Noise: contrast | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4302, 'Dice': 0.4978, 'Precision': 0.6022, 'Recall': 0.755}
+Noise: contrast | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.5985, 'Dice': 0.6829, 'Precision': 0.7614, 'Recall': 0.7693}
+
+
+Noise: sharpen | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.3859, 'Dice': 0.4645, 'Precision': 0.7178, 'Recall': 0.4701}
+Noise: sharpen | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.4135, 'Dice': 0.4813, 'Precision': 0.6465, 'Recall': 0.6763}
+Noise: sharpen | Model: sam_h | Dataset: stanford-background | {'Iou': 0.5585, 'Dice': 0.6473, 'Precision': 0.7732, 'Recall': 0.7292}
+Noise: sharpen | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.447, 'Dice': 0.5099, 'Precision': 0.6512, 'Recall': 0.5408}
+Noise: sharpen | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.3963, 'Dice': 0.4588, 'Precision': 0.6472, 'Recall': 0.6803}
+Noise: sharpen | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5551, 'Dice': 0.6326, 'Precision': 0.8284, 'Recall': 0.6642}
+Noise: sharpen | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.4131, 'Dice': 0.5091, 'Precision': 0.6284, 'Recall': 0.5668}
+Noise: sharpen | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4233, 'Dice': 0.4924, 'Precision': 0.5886, 'Recall': 0.763}
+Noise: sharpen | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.5345, 'Dice': 0.627, 'Precision': 0.7073, 'Recall': 0.7649}
+
+
+Noise: translation | Model: sam_h | Dataset: VOC2012 | {'Iou': 0.3723, 'Dice': 0.4562, 'Precision': 0.7177, 'Recall': 0.4516}
+Noise: translation | Model: sam_h | Dataset: BSDS500 | {'Iou': 0.471, 'Dice': 0.5403, 'Precision': 0.6646, 'Recall': 0.7179}
+Noise: translation | Model: sam_h | Dataset: stanford-background | {'Iou': 0.6444, 'Dice': 0.7257, 'Precision': 0.8272, 'Recall': 0.7683}
+Noise: translation | Model: sam2_h | Dataset: VOC2012 | {'Iou': 0.4239, 'Dice': 0.4857, 'Precision': 0.6574, 'Recall': 0.5153}
+Noise: translation | Model: sam2_h | Dataset: BSDS500 | {'Iou': 0.4101, 'Dice': 0.4781, 'Precision': 0.6344, 'Recall': 0.686}
+Noise: translation | Model: sam2_h | Dataset: stanford-background | {'Iou': 0.5609, 'Dice': 0.6375, 'Precision': 0.8308, 'Recall': 0.633}
+Noise: translation | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.3692, 'Dice': 0.4573, 'Precision': 0.6656, 'Recall': 0.4858}
+Noise: translation | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.4879, 'Dice': 0.5521, 'Precision': 0.6146, 'Recall': 0.8035}
+Noise: translation | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.6609, 'Dice': 0.7377, 'Precision': 0.7761, 'Recall': 0.8371}
+
+
+
+Total time: 3017.85 seconds

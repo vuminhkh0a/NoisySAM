@@ -10,11 +10,8 @@ from metrics import *
 from noise import *
 from model import *
 
-import warnings
-warnings.simplefilter("ignore")
 
-
-DEVICE = "cuda:2" if torch.cuda.is_available() else "cpu"
+DEVICE = "cuda:3" if torch.cuda.is_available() else "cpu"
 
 DATASETS = [
     "VOC2012",
@@ -41,6 +38,53 @@ NOISES = {
 }
 
 
+def get_box_prompts(mask, expand_ratio=0.02):
+    
+    H, W = mask.shape
+    expand_x = int(W * expand_ratio)
+    expand_y = int(H * expand_ratio)
+
+    boxes = []
+
+    classes = np.unique(mask)
+
+    for cls in classes:
+        if cls:
+            binary = (mask == cls).astype(np.uint8)
+
+            num_labels, labels = cv2.connectedComponents(binary)
+
+            for i in range(1, num_labels):
+                component = (labels == i).astype(np.uint8)
+
+                ys, xs = np.where(component)
+
+                if len(xs) == 0:
+                    continue
+
+                x1, x2 = xs.min(), xs.max()
+                y1, y2 = ys.min(), ys.max()
+
+                x1 = max(0, x1 - expand_x)
+                y1 = max(0, y1 - expand_y)
+                x2 = min(W - 1, x2 + expand_x)
+                y2 = min(H - 1, y2 + expand_y)
+
+                boxes.append([x1, y1, x2, y2])
+
+    return boxes
+
+def get_point_prompts(mask):
+    labeled_mask, num_regions = ndimage.label(mask == 1)
+    points = []
+    for region_id in range(1, num_regions + 1):
+        region = labeled_mask == region_id
+        dist = ndimage.distance_transform_edt(region)
+        cy, cx = np.unravel_index(np.argmax(dist), dist.shape)
+        points.append([cx, cy])
+
+    return np.array(points)
+
 def split_masks(y):
     masks = []
 
@@ -51,30 +95,39 @@ def split_masks(y):
 
     return masks
 
-def sample_points(mask):
-    labeled_mask, num_regions = ndimage.label(mask)
-    points = []
-    for region_id in range(1, num_regions + 1):
-        region = labeled_mask == region_id
-        dist = ndimage.distance_transform_edt(region)
-        cy, cx = np.unravel_index(np.argmax(dist), dist.shape)
-        points.append([cx, cy])
+def sam_predict_mask(predictor, image, prompts, prompt_type):
 
-    return np.array(points)
+    if prompt_type == 'point':
+        labels = np.ones(len(prompts))
+        masks, scores, _ = predictor.predict(
+            point_coords=prompts,
+            point_labels=labels,
+            multimask_output=False
+        )
+        return masks[0]
 
-def sam_predict_mask(predictor, image, points):
+    elif prompt_type == 'box':
+        final_mask = None
 
-    labels = np.ones(len(points))
+        for box in prompts:
+            box = np.array(box)
+            masks, scores, _ = predictor.predict(
+                box=box,
+                multimask_output=False
+            )
 
-    masks, scores, _ = predictor.predict(
-        point_coords=points,
-        point_labels=labels,
-        multimask_output=False
-    )
+            pred = masks[0]
 
-    return masks[0]
+            if final_mask is None:
+                final_mask = pred
+            else:
+                final_mask = np.logical_or(final_mask, pred)
 
-def evaluate_sam(image, gt_mask, predictor):
+        return final_mask
+
+
+
+def evaluate_sam(image, gt_mask, predictor, prompt_type):
 
     masks = split_masks(gt_mask)
 
@@ -82,25 +135,32 @@ def evaluate_sam(image, gt_mask, predictor):
     dices = []
     precisions = []
     recalls = []
-    with torch.no_grad():
-        predictor.set_image(image)
 
-        for mask in masks:
 
-            points = sample_points(mask)
-            pred = sam_predict_mask(predictor, image, points)
-            metrics = compute_metrics(pred, mask)
+    predictor.set_image(image)
 
-            ious.append(metrics["iou"])
-            dices.append(metrics["dice"])
-            precisions.append(metrics["precision"])
-            recalls.append(metrics["recall"])
+    for mask in masks:
+
+        if prompt_type == 'point':
+            points = get_point_prompts(mask)
+            pred = sam_predict_mask(predictor, image, points, prompt_type)
+
+        elif prompt_type == 'box':
+            boxes = get_box_prompts(mask)
+            pred = sam_predict_mask(predictor, image, boxes, prompt_type)
+
+        metrics = compute_metrics(pred, mask)
+
+        ious.append(metrics["iou"])
+        dices.append(metrics["dice"])
+        precisions.append(metrics["precision"])
+        recalls.append(metrics["recall"])
 
     mean_metrics = {
-        "miou": np.mean(ious),
-        "mdice": np.mean(dices),
-        "mprecision": np.mean(precisions),
-        "mrecall": np.mean(recalls)
+        "miou": np.round(np.mean(ious), 2),
+        "mdice": np.round(np.mean(dices), 2),
+        "mprecision": np.round(np.mean(precisions), 2),
+        "mrecall": np.round(np.mean(recalls), 2)
     }
 
     return mean_metrics
@@ -108,72 +168,65 @@ def evaluate_sam(image, gt_mask, predictor):
 
 def main():
 
-    start_time = time.time()
+    start_time = time.perf_counter()
 
-    predictors = get_predictor(MODELS, DEVICE)
+    predictors = get_predictors(MODELS, DEVICE)
 
-    for noise_name, transform in NOISES.items():
+    for dataset_name in DATASETS:
+        x, y = get_dataset(dataset_name, True)
+        for noise_name, transform in NOISES.items():
+            
 
-        for model_name in MODELS:
+            # for i in range(len(x)):
+            for i in range(1):
+                image = cv2.imread(x[i])
 
-            predictor = predictors[model_name]
+                if dataset_name == "BSDS500":
 
-            for dataset_name in DATASETS:
+                    mask = scipy.io.loadmat(y[i])
+                    mask = mask['groundTruth'][0][0]['Segmentation'][0][0]
 
-                x, y = get_dataset(dataset_name, True)
+                else:
 
+                    mask = cv2.imread(y[i], cv2.IMREAD_GRAYSCALE)
+
+                if transform is not None:
+
+                    augmented = transform(image=image, mask=mask)
+                    image = augmented["image"]
+                    mask = augmented["mask"]
+                
                 miou_list = []
                 mdice_list = []
                 mprecision_list = []
                 mrecall_list = []
 
-                # for i in range(len(x)):
-                for i in range(50):
+                for model_name in MODELS:
 
-                    image = cv2.imread(x[i])
+                    predictor = predictors[model_name]
 
-                    if dataset_name == "BSDS500":
-
-                        mask = scipy.io.loadmat(y[i])
-                        mask = mask['groundTruth'][0][0]['Segmentation'][0][0]
-
-                    else:
-
-                        mask = cv2.imread(y[i], cv2.IMREAD_GRAYSCALE)
-
-                    if transform is not None:
-
-                        augmented = transform(image=image, mask=mask)
-                        image = augmented["image"]
-                        mask = augmented["mask"]
-
-                    result = evaluate_sam(image, mask, predictor)
-
-                    if result is None:
-                        continue
-
-                    metrics = result
+                    metrics = evaluate_sam(image, mask, predictor, 'box')
 
                     miou_list.append(metrics["miou"])
                     mdice_list.append(metrics["mdice"])
                     mprecision_list.append(metrics["mprecision"])
                     mrecall_list.append(metrics["mrecall"])
 
-                results = {
-                    "Iou": np.round(np.mean(miou_list), 4).item(),
-                    "Dice": np.round(np.mean(mdice_list), 4).item(),
-                    "Precision": np.round(np.mean(mprecision_list), 4).item(),
-                    "Recall": np.round(np.mean(mrecall_list), 4).item()
-                }
+            results = {
+                "Iou": np.round(np.mean(miou_list), 4).item(),
+                "Dice": np.round(np.mean(mdice_list), 4).item(),
+                "Precision": np.round(np.mean(mprecision_list), 4).item(),
+                "Recall": np.round(np.mean(mrecall_list), 4).item()
+            }
 
-                print(
-                    f"Noise: {noise_name} | Model: {model_name} | Dataset: {dataset_name} | {results}"
-                )
+            print(
+                f"Noise: {noise_name} | Model: {model_name} | Dataset: {dataset_name} | {results}"
+            )
 
-                torch.cuda.empty_cache()
+            torch.cuda.empty_cache()
         print('\n')
 
-    end_time = time.time()
+    end_time = time.perf_counter()
 
     print(f"\nTotal time: {end_time-start_time:.2f} seconds")
 

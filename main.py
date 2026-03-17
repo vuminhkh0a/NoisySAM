@@ -11,7 +11,7 @@ from noise import *
 from model import *
 
 
-DEVICE = "cuda:3" if torch.cuda.is_available() else "cpu"
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 DATASETS = [
     "VOC2012",

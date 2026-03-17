@@ -112,6 +112,9 @@ def get_box_prompts(mask, expand_ratio=0.02):
     return boxes
 ```
 
+## Experimental results
+![Result](image/results)
+
 ## Future Extensions
 
 ### Additional Models

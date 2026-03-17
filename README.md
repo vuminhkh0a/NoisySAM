@@ -113,7 +113,7 @@ def get_box_prompts(mask, expand_ratio=0.02):
 ```
 
 ## Experimental results
-![Result](image/results)
+![Result](image/results?raw=true)
 
 ## Future Extensions
 

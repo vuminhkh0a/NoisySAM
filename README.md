@@ -73,7 +73,7 @@ def sample_points(mask):
 
 Box prompt selection strategy:
 The box prompt strategy is also applied for each classes from the ground truth.  
-We compute a tight bounding box from the mask and enlarge it by a expand coefficient on each side to simulate slight localization uncertainty from real-life prompt situations.
+We compute a tight bounding box from the mask and enlarge it by an expand coefficient on each side to simulate slight localization uncertainty from real-life prompt situations.
 
 ```python
 def get_box_prompts(mask, expand_ratio=0.02):

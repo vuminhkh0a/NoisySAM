@@ -20,30 +20,38 @@ The following foundation models are currently evaluated:
 
 ## Noise and Transformations
 
-Various perturbations are applied to the input images using Albumentations:
+The following perturbations are implemented using Albumentations. Each transformation is applied with `p=1.0` inside its respective pipeline.
 
 ### Geometric Transformations
-- Horizontal + Vertical Flip
-- Rotation
-- RandomRotate90
-- Random Scale
-- Translation (Shift)
+- **Flip**
+  - `HorizontalFlip`
+  - `VerticalFlip`
+- **Rotation**
+  - `Rotate (limit=45°)`
+  - `RandomRotate90`
+- **Scaling**
+  - `RandomScale (scale_limit=0.3)`
+- **Translation**
+  - `ShiftScaleRotate (shift_limit=0.1, scale_limit=0, rotate_limit=0)`
 
 ### Noise Injection
-- Gaussian Noise
-- ISO Noise
+- `GaussNoise`
+- `ISONoise`
 
 ### Color Transformations
-- Hue / Saturation Shift
-- RGB Shift
+- `HueSaturationValue`
+- `RGBShift`
 
 ### Contrast and Illumination
-- Random Brightness / Contrast
-- Gamma Adjustment
+- `RandomBrightnessContrast`
+- `RandomGamma`
 
 ### Image Enhancement
-- Sharpen
+- `Sharpen`
 
+### No Transformation
+- Identity pipeline (`A.Compose([])`) for baseline comparison
+  
 ## Inference Strategy
 
 The segmentation models are prompted using sampled points extracted from the ground-truth mask.

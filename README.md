@@ -200,13 +200,7 @@ Example output format:
 
 # Experimental Results
 
-Example visualization of robustness evaluation:
-
-```markdown
 ![Results](images/results.png)
-```
-
-The experiments show that segmentation performance generally degrades as corruption severity increases. Different foundation models exhibit varying robustness characteristics depending on the perturbation type.
 
 ---
 

@@ -1,156 +1,297 @@
-# NoisySAM - Evaluate foundation model robustness under perturbations for natural image segmentation [Ongoing]
+# NoisySAM - Evaluate foundation model robustness under perturbations for natural image segmentation (Ongoing)
 
-This project evaluates the robustness of foundation segmentation models under different types of noise and image perturbations.
+This project evaluates the robustness of foundation segmentation models under various image corruptions and perturbations for natural image segmentation tasks.
 
-The goal is to systematically test how segmentation performance changes when images are affected by transformations such as geometric distortions, noise injection, color shifts, and mixed-image augmentations.
+The main objective is to analyze how segmentation quality degrades when input images are affected by realistic distribution shifts such as noise injection, blur, compression artifacts, illumination changes, and weather-related corruptions.
 
-## Current Models
+The benchmark focuses on prompt-based segmentation foundation models and provides a unified evaluation pipeline across multiple datasets, perturbation types, and severity levels.
 
-The following foundation models are currently evaluated:
+---
 
-- SAM
-- SAM2
-- MobileSAM
+# Implemented Models
 
-## Current Datasets
+The following segmentation foundation models are currently supported:
 
-- BSDS500
-- VOC2012
-- Stanford Background Dataset
+* SAM
+* SAM2
+* SAM3
+* MobileSAM
+* FastSAM
 
-## Noise and Transformations
+---
 
-The following perturbations are implemented using Albumentations. Each transformation is applied with `p=1.0` inside its respective pipeline.
+# Datasets
 
-### Geometric Transformations
-- **Flip**
-  - `HorizontalFlip`
-  - `VerticalFlip`
-- **Rotation**
-  - `Rotate (limit=45°)`
-  - `RandomRotate90`
-- **Scaling**
-  - `RandomScale (scale_limit=0.3)`
-- **Translation**
-  - `ShiftScaleRotate (shift_limit=0.1, scale_limit=0, rotate_limit=0)`
+Current benchmark datasets:
 
-### Noise Injection
-- `GaussNoise`
-- `ISONoise`
+* VOC2012
+* BSDS500
+* Stanford Background Dataset
 
-### Color Transformations
-- `HueSaturationValue`
-- `RGBShift`
+Planned datasets:
 
-### Contrast and Illumination
-- `RandomBrightnessContrast`
-- `RandomGamma`
+* COCO
+* Cityscapes
+* Medical segmentation datasets
 
-### Image Enhancement
-- `Sharpen`
+---
 
-### No Transformation
-- Identity pipeline (`A.Compose([])`) for baseline comparison
-  
-## Inference Strategy
+# Implemented Perturbations
 
-The segmentation models are prompted using sampled points extracted from the ground-truth mask.
+The benchmark currently supports the following corruption types:
 
-Point prompt selection strategy:
+| Category     | Perturbation     |
+| ------------ | ---------------- |
+| Noise        | Gaussian Noise   |
+| Blur         | Motion Blur      |
+| Weather      | Snow             |
+| Illumination | Brightness       |
+| Contrast     | Contrast Shift   |
+| Compression  | JPEG Compression |
 
-1. Split the original segmentation mask into binary masks for each class in the image.
-2. For each binary mask, apply connected component labeling to identify individual regions.
-3. For each connected region, compute the Euclidean distance transform, which measures the distance of each foreground pixel to the nearest boundary pixel.
-4. Select the pixel with the maximum distance value (i.e., the pixel farthest from the boundary) as the representative prompt point for that region.
-5. Store the coordinates of this pixel as the sampled point.
+Each perturbation is evaluated using 5 severity levels.
+
+Example configuration:
+
+```python
+NOISES = {
+    "none": None,
+    "gaussian_noise": gaussian_noise,
+    "motion_blur": motion_blur,
+    "snow": snow,
+    "brightness": brightness,
+    "contrast": contrast,
+    "jpeg": jpeg,
+}
+```
+
+---
+
+# Evaluation Pipeline
+
+The evaluation framework follows these steps:
+
+1. Load image and segmentation mask
+2. Apply corruption with selected severity
+3. Generate prompts from the ground-truth mask
+4. Run segmentation inference using foundation models
+5. Compute segmentation metrics
+6. Aggregate results across the dataset
+
+---
+
+# Prompt Generation Strategy
+
+## Box Prompt Sampling
+
+The current implementation uses box prompts generated directly from connected components in the ground-truth mask.
+
+For each connected region:
+
+1. Extract connected components from the binary mask
+2. Compute a tight bounding box around the component
+3. Expand the bounding box slightly using an expansion ratio
+4. Use the expanded box as the prompt for segmentation inference
+
+This simulates imperfect localization conditions commonly encountered in practical applications.
 
 Example implementation:
 
 ```python
-def sample_points(mask):
-    labeled_mask, num_regions = ndimage.label(mask == 1)
-    points = []
-    for region_id in range(1, num_regions + 1):
-        region = labeled_mask == region_id
-        dist = ndimage.distance_transform_edt(region)
-        cy, cx = np.unravel_index(np.argmax(dist), dist.shape)
-        points.append([cx, cy])
-
-    return np.array(points)
-```
-
-Box prompt selection strategy:
-The box prompt strategy is also applied for each classes from the ground truth. A tight bounding box is computed from the mask and enlarge it by an expand coefficient on each side to simulate slight localization uncertainty from real-life prompt situations.
-
-```python
 def get_box_prompts(mask, expand_ratio=0.02):
-    
     H, W = mask.shape
+
     expand_x = int(W * expand_ratio)
     expand_y = int(H * expand_ratio)
 
     boxes = []
 
-    classes = np.unique(mask)
+    binary = mask.astype(np.uint8)
+    num_labels, labels = cv2.connectedComponents(binary)
 
-    for cls in classes:
-        if cls:
-            binary = (mask == cls).astype(np.uint8)
+    for i in range(1, num_labels):
 
-            num_labels, labels = cv2.connectedComponents(binary)
+        component = (labels == i)
 
-            for i in range(1, num_labels):
-                component = (labels == i).astype(np.uint8)
+        ys, xs = np.where(component)
 
-                ys, xs = np.where(component)
+        if len(xs) == 0:
+            continue
 
-                if len(xs) == 0:
-                    continue
+        x1, x2 = xs.min(), xs.max()
+        y1, y2 = ys.min(), ys.max()
 
-                x1, x2 = xs.min(), xs.max()
-                y1, y2 = ys.min(), ys.max()
+        x1 = max(0, x1 - expand_x)
+        y1 = max(0, y1 - expand_y)
 
-                x1 = max(0, x1 - expand_x)
-                y1 = max(0, y1 - expand_y)
-                x2 = min(W - 1, x2 + expand_x)
-                y2 = min(H - 1, y2 + expand_y)
+        x2 = min(W - 1, x2 + expand_x)
+        y2 = min(H - 1, y2 + expand_y)
 
-                boxes.append([x1, y1, x2, y2])
+        boxes.append([x1, y1, x2, y2])
 
     return boxes
 ```
 
-## Experimental results
-![Result](./image/results?raw=true)
+---
 
-## Future Extensions
+# Inference Procedure
 
-### Additional Models
+For each object instance:
 
-The following segmentation foundation models are planned to be integrated:
+1. Generate box prompts
+2. Run model inference
+3. Merge predictions from all prompts
+4. Compare prediction against the ground truth
+5. Compute evaluation metrics
 
-- SAM3
-- MobileSAMv2
-- FastSAM
+Example inference loop:
 
-These models will be evaluated under the same noise and perturbation settings to provide a consistent robustness comparison.
+```python
+for b in boxes:
 
-### Additional Datasets
+    p, _, _ = predictor.predict(
+        box=np.array(b),
+        multimask_output=False
+    )
 
-Future experiments will also include more complex and large-scale datasets:
+    if p is None or len(p) == 0:
+        continue
 
-- COCO
-- Cityscapes
+    p = p[0]
 
-These datasets introduce more diverse scenes, object categories, and challenging segmentation scenarios, enabling a more comprehensive robustness benchmark.
+    if merged_pred is None:
+        merged_pred = p
+    else:
+        merged_pred = np.logical_or(merged_pred, p)
+```
 
-### Additional perturbations
-- **MixUp**
-- **CutMix**
-- **CutOut**
+---
 
-### Other Planned Improvements
+# Evaluation Metrics
 
-- Testing on medical benchmark dataset using medical foundation models such as MedSAM
-- Using other prompt strateges such box or text
-- Visualization tools for prediction comparison across models
+The benchmark currently reports:
+
+* IoU
+* Dice Score
+* Precision
+* Recall
+* HD95
+
+Metrics are averaged across all object instances in the dataset.
+
+Example output format:
+
+```json
+{
+    "noise": "gaussian_noise",
+    "severity": 3,
+    "model": "sam2",
+    "metrics": {
+        "Iou": 0.71,
+        "Dice": 0.81,
+        "Precision": 0.84,
+        "Recall": 0.79,
+        "HD95": 5.62
+    }
+}
+```
+
+---
+
+# Experimental Results
+
+Example visualization of robustness evaluation:
+
+```markdown
+![Results](./images/results.png)
+```
+
+The experiments show that segmentation performance generally degrades as corruption severity increases. Different foundation models exhibit varying robustness characteristics depending on the perturbation type.
+
+---
+
+# Running the Benchmark
+
+Example execution:
+
+```bash
+python main.py
+```
+
+Results are automatically saved to:
+
+```bash
+results.json
+```
+
+---
+
+# Project Structure
+
+```text
+NoisySAM/
+│
+├── main.py
+├── data.py
+├── model.py
+├── metrics.py
+├── noise.py
+│
+├── results.json
+│
+├── images/
+│   └── results.png
+│
+└── README.md
+```
+
+---
+
+# Future Work
+
+## Additional Models
+
+Planned integrations:
+
+* MedSAM
+* MobileSAMv2
+* EfficientSAM
+
+---
+
+## Additional Perturbations
+
+Future corruption types:
+
+* MixUp
+* CutMix
+* CutOut
+* Fog
+* Rain
+* Elastic Distortion
+
+---
+
+## Additional Features
+
+Planned improvements include:
+
+* Medical image robustness benchmarking
+* Point and text prompt evaluation
+* Cross-dataset generalization analysis
+* Robustness visualization dashboard
+* Per-class robustness statistics
+* Real-world corruption benchmarks
+* Inference speed comparison across models
+
+---
+
+# Citation
+
+```bibtex
+@misc{noisysam2026,
+  title={NoisySAM: Robustness Evaluation of Foundation Segmentation Models Under Image Perturbations},
+  author={Khoa Vu Minh},
+  year={2026}
+}
+```

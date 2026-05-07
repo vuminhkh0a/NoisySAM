@@ -1,4 +1,8 @@
-*
-!main.py
-!model.py
-!demo.ipynb
+checkpoints/
+data/
+FastSAM/
+mobile_sam/
+sam2/
+sam3/
+segment_anything/
+run.sh

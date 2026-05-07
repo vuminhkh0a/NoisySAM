@@ -1,9 +1,6 @@
-/mnt/nvme0/home/utbt/KhoaVM/khoa-env/lib/python3.12/site-packages/albumentations/core/validation.py:132: UserWarning: ShiftScaleRotate is a special case of Affine transform. Please use Affine transform instead.
-  original_init(self, **validated_kwargs)
-/mnt/nvme0/home/utbt/KhoaVM/khoa-env/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
-  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
-/mnt/nvme0/home/utbt/KhoaVM/khoa-env/lib/python3.12/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
-  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+nohup: ignoring input
+/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/segment_anything/build_sam.py:105: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(f)
 /mnt/nvme0/home/utbt/KhoaVM/NoisySAM/mobile_sam/modeling/tiny_vit_sam.py:656: UserWarning: Overwriting tiny_vit_5m_224 in registry with mobile_sam.modeling.tiny_vit_sam.tiny_vit_5m_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
   return register_model(fn_wrapper)
 /mnt/nvme0/home/utbt/KhoaVM/NoisySAM/mobile_sam/modeling/tiny_vit_sam.py:656: UserWarning: Overwriting tiny_vit_11m_224 in registry with mobile_sam.modeling.tiny_vit_sam.tiny_vit_11m_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
@@ -14,38 +11,474 @@
   return register_model(fn_wrapper)
 /mnt/nvme0/home/utbt/KhoaVM/NoisySAM/mobile_sam/modeling/tiny_vit_sam.py:656: UserWarning: Overwriting tiny_vit_21m_512 in registry with mobile_sam.modeling.tiny_vit_sam.tiny_vit_21m_512. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
   return register_model(fn_wrapper)
-Noise: none | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.53, 'Dice': 0.64, 'Precision': 0.6067, 'Recall': 0.7467}
-Noise: flip | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.5767, 'Dice': 0.6933, 'Precision': 0.6533, 'Recall': 0.7967}
-Noise: rotation | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.51, 'Dice': 0.63, 'Precision': 0.6533, 'Recall': 0.74}
-Noise: scale | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.5567, 'Dice': 0.6667, 'Precision': 0.6467, 'Recall': 0.7367}
-Noise: noise injection | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.4467, 'Dice': 0.5633, 'Precision': 0.4833, 'Recall': 0.8367}
-Noise: color | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.5267, 'Dice': 0.6367, 'Precision': 0.6067, 'Recall': 0.7433}
-Noise: contrast | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.5267, 'Dice': 0.6367, 'Precision': 0.6067, 'Recall': 0.7467}
-Noise: sharpen | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.53, 'Dice': 0.6467, 'Precision': 0.59, 'Recall': 0.79}
-Noise: translation | Model: mobile_sam | Dataset: VOC2012 | {'Iou': 0.5333, 'Dice': 0.6467, 'Precision': 0.6433, 'Recall': 0.7233}
-
-
-Noise: none | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.92, 'Dice': 0.9533, 'Precision': 0.97, 'Recall': 0.95}
-Noise: flip | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.9167, 'Dice': 0.9533, 'Precision': 0.97, 'Recall': 0.94}
-Noise: rotation | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.8033, 'Dice': 0.8567, 'Precision': 0.87, 'Recall': 0.8633}
-Noise: scale | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.9233, 'Dice': 0.9567, 'Precision': 0.97, 'Recall': 0.95}
-Noise: noise injection | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.9233, 'Dice': 0.9567, 'Precision': 0.9433, 'Recall': 0.9733}
-Noise: color | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.92, 'Dice': 0.9533, 'Precision': 0.9667, 'Recall': 0.95}
-Noise: contrast | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.92, 'Dice': 0.9533, 'Precision': 0.97, 'Recall': 0.9533}
-Noise: sharpen | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.92, 'Dice': 0.9533, 'Precision': 0.9667, 'Recall': 0.9533}
-Noise: translation | Model: mobile_sam | Dataset: BSDS500 | {'Iou': 0.77, 'Dice': 0.8, 'Precision': 0.81, 'Recall': 0.8433}
-
-
-Noise: none | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.8067, 'Dice': 0.89, 'Precision': 0.9267, 'Recall': 0.8667}
-Noise: flip | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.7967, 'Dice': 0.8733, 'Precision': 0.8667, 'Recall': 0.89}
-Noise: rotation | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.73, 'Dice': 0.81, 'Precision': 0.8133, 'Recall': 0.83}
-Noise: scale | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.8, 'Dice': 0.88, 'Precision': 0.93, 'Recall': 0.8567}
-Noise: noise injection | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.7233, 'Dice': 0.82, 'Precision': 0.7767, 'Recall': 0.8867}
-Noise: color | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.8167, 'Dice': 0.8933, 'Precision': 0.9333, 'Recall': 0.87}
-Noise: contrast | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.8, 'Dice': 0.8833, 'Precision': 0.9267, 'Recall': 0.86}
-Noise: sharpen | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.8033, 'Dice': 0.8867, 'Precision': 0.8867, 'Recall': 0.9033}
-Noise: translation | Model: mobile_sam | Dataset: stanford-background | {'Iou': 0.6633, 'Dice': 0.7333, 'Precision': 0.76, 'Recall': 0.7867}
-
-
-
-Total time: 147.31 seconds
+/mnt/nvme0/home/utbt/KhoaVM/NoisySAM/mobile_sam/build_sam.py:91: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(f)
+Models: dict_keys(['sam1', 'sam2', 'sam3', 'fastsam', 'mobilesam'])
+Device: cuda:0
+Dataset size: 1449
+Noise: none | Severity: 1 | Model: sam1 | Results: {'Iou': 0.82, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.44}
+Time: 59.61 seconds
+----------------------------------------
+Noise: none | Severity: 1 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.96, 'HD95': 9.79}
+Time: 24.27 seconds
+----------------------------------------
+Noise: none | Severity: 1 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.2}
+Time: 92.23 seconds
+----------------------------------------
+Noise: none | Severity: 1 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.87, 'HD95': 39.29}
+Time: 15.71 seconds
+----------------------------------------
+Noise: none | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 16.74}
+Time: 12.35 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 1 | Model: sam1 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.85, 'Recall': 0.94, 'HD95': 11.63}
+Time: 61.79 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 1 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.96, 'HD95': 9.43}
+Time: 25.35 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 1 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 11.18}
+Time: 93.03 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 1 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.75, 'Precision': 0.7, 'Recall': 0.86, 'HD95': 39.72}
+Time: 14.42 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 17.24}
+Time: 13.65 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 2 | Model: sam1 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.85, 'Recall': 0.94, 'HD95': 12.5}
+Time: 60.44 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 2 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.96, 'HD95': 9.75}
+Time: 27.13 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 2 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 10.5}
+Time: 99.02 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 2 | Model: fastsam | Results: {'Iou': 0.67, 'Dice': 0.75, 'Precision': 0.7, 'Recall': 0.86, 'HD95': 37.84}
+Time: 22.97 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 2 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.95, 'HD95': 17.25}
+Time: 17.03 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 3 | Model: sam1 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 13.74}
+Time: 84.06 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 3 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.95, 'HD95': 11.55}
+Time: 34.31 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 3 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.93, 'HD95': 11.77}
+Time: 135.39 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 3 | Model: fastsam | Results: {'Iou': 0.65, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.86, 'HD95': 42.61}
+Time: 23.40 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 3 | Model: mobilesam | Results: {'Iou': 0.75, 'Dice': 0.84, 'Precision': 0.79, 'Recall': 0.95, 'HD95': 21.08}
+Time: 17.60 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 4 | Model: sam1 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.93, 'HD95': 16.46}
+Time: 86.07 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 4 | Model: sam2 | Results: {'Iou': 0.78, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.95, 'HD95': 14.45}
+Time: 34.64 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 4 | Model: sam3 | Results: {'Iou': 0.78, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 12.75}
+Time: 125.49 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 4 | Model: fastsam | Results: {'Iou': 0.64, 'Dice': 0.72, 'Precision': 0.69, 'Recall': 0.85, 'HD95': 46.93}
+Time: 15.55 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 4 | Model: mobilesam | Results: {'Iou': 0.73, 'Dice': 0.82, 'Precision': 0.76, 'Recall': 0.95, 'HD95': 23.39}
+Time: 12.08 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 5 | Model: sam1 | Results: {'Iou': 0.75, 'Dice': 0.84, 'Precision': 0.79, 'Recall': 0.93, 'HD95': 19.6}
+Time: 61.41 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 5 | Model: sam2 | Results: {'Iou': 0.74, 'Dice': 0.82, 'Precision': 0.78, 'Recall': 0.93, 'HD95': 19.45}
+Time: 25.67 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 5 | Model: sam3 | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.8, 'Recall': 0.93, 'HD95': 14.06}
+Time: 92.65 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 5 | Model: fastsam | Results: {'Iou': 0.55, 'Dice': 0.63, 'Precision': 0.61, 'Recall': 0.79, 'HD95': 75.65}
+Time: 15.37 seconds
+----------------------------------------
+Noise: gaussian_noise | Severity: 5 | Model: mobilesam | Results: {'Iou': 0.7, 'Dice': 0.8, 'Precision': 0.74, 'Recall': 0.94, 'HD95': 27.17}
+Time: 12.73 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 1 | Model: sam1 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 12.96}
+Time: 61.27 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 1 | Model: sam2 | Results: {'Iou': 0.79, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.95, 'HD95': 11.04}
+Time: 23.94 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 1 | Model: sam3 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 12.07}
+Time: 92.18 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 1 | Model: fastsam | Results: {'Iou': 0.6, 'Dice': 0.68, 'Precision': 0.65, 'Recall': 0.83, 'HD95': 54.2}
+Time: 14.95 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.75, 'Dice': 0.83, 'Precision': 0.78, 'Recall': 0.94, 'HD95': 20.51}
+Time: 12.65 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 2 | Model: sam1 | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.8, 'Recall': 0.94, 'HD95': 15.04}
+Time: 61.38 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 2 | Model: sam2 | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.95, 'HD95': 12.59}
+Time: 24.89 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 2 | Model: sam3 | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.8, 'Recall': 0.95, 'HD95': 11.66}
+Time: 93.39 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 2 | Model: fastsam | Results: {'Iou': 0.52, 'Dice': 0.6, 'Precision': 0.57, 'Recall': 0.75, 'HD95': 76.94}
+Time: 14.78 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 2 | Model: mobilesam | Results: {'Iou': 0.7, 'Dice': 0.8, 'Precision': 0.74, 'Recall': 0.94, 'HD95': 24.13}
+Time: 13.63 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 3 | Model: sam1 | Results: {'Iou': 0.74, 'Dice': 0.83, 'Precision': 0.79, 'Recall': 0.93, 'HD95': 16.48}
+Time: 60.82 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 3 | Model: sam2 | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.8, 'Recall': 0.95, 'HD95': 13.36}
+Time: 27.13 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 3 | Model: sam3 | Results: {'Iou': 0.76, 'Dice': 0.85, 'Precision': 0.8, 'Recall': 0.95, 'HD95': 11.84}
+Time: 92.33 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 3 | Model: fastsam | Results: {'Iou': 0.54, 'Dice': 0.62, 'Precision': 0.6, 'Recall': 0.74, 'HD95': 71.33}
+Time: 13.84 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 3 | Model: mobilesam | Results: {'Iou': 0.69, 'Dice': 0.79, 'Precision': 0.73, 'Recall': 0.93, 'HD95': 24.17}
+Time: 12.62 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 4 | Model: sam1 | Results: {'Iou': 0.74, 'Dice': 0.83, 'Precision': 0.79, 'Recall': 0.93, 'HD95': 15.77}
+Time: 60.77 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 4 | Model: sam2 | Results: {'Iou': 0.76, 'Dice': 0.85, 'Precision': 0.8, 'Recall': 0.95, 'HD95': 12.2}
+Time: 27.98 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 4 | Model: sam3 | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.79, 'Recall': 0.94, 'HD95': 12.33}
+Time: 95.14 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 4 | Model: fastsam | Results: {'Iou': 0.52, 'Dice': 0.6, 'Precision': 0.58, 'Recall': 0.73, 'HD95': 73.73}
+Time: 17.83 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 4 | Model: mobilesam | Results: {'Iou': 0.69, 'Dice': 0.79, 'Precision': 0.73, 'Recall': 0.93, 'HD95': 24.47}
+Time: 16.62 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 5 | Model: sam1 | Results: {'Iou': 0.71, 'Dice': 0.8, 'Precision': 0.76, 'Recall': 0.92, 'HD95': 18.09}
+Time: 62.76 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 5 | Model: sam2 | Results: {'Iou': 0.74, 'Dice': 0.83, 'Precision': 0.78, 'Recall': 0.94, 'HD95': 13.86}
+Time: 25.88 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 5 | Model: sam3 | Results: {'Iou': 0.73, 'Dice': 0.82, 'Precision': 0.77, 'Recall': 0.94, 'HD95': 13.81}
+Time: 95.97 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 5 | Model: fastsam | Results: {'Iou': 0.45, 'Dice': 0.52, 'Precision': 0.52, 'Recall': 0.66, 'HD95': 98.84}
+Time: 15.24 seconds
+----------------------------------------
+Noise: motion_blur | Severity: 5 | Model: mobilesam | Results: {'Iou': 0.65, 'Dice': 0.76, 'Precision': 0.69, 'Recall': 0.93, 'HD95': 27.0}
+Time: 13.28 seconds
+----------------------------------------
+Noise: snow | Severity: 1 | Model: sam1 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.85, 'Recall': 0.94, 'HD95': 14.28}
+Time: 64.75 seconds
+----------------------------------------
+Noise: snow | Severity: 1 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.95, 'HD95': 10.62}
+Time: 29.13 seconds
+----------------------------------------
+Noise: snow | Severity: 1 | Model: sam3 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.93, 'HD95': 11.41}
+Time: 95.13 seconds
+----------------------------------------
+Noise: snow | Severity: 1 | Model: fastsam | Results: {'Iou': 0.64, 'Dice': 0.72, 'Precision': 0.67, 'Recall': 0.86, 'HD95': 48.21}
+Time: 18.11 seconds
+----------------------------------------
+Noise: snow | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.75, 'Dice': 0.84, 'Precision': 0.79, 'Recall': 0.94, 'HD95': 20.5}
+Time: 17.15 seconds
+----------------------------------------
+Noise: snow | Severity: 2 | Model: sam1 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.93, 'HD95': 15.88}
+Time: 65.12 seconds
+----------------------------------------
+Noise: snow | Severity: 2 | Model: sam2 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.95, 'HD95': 11.92}
+Time: 30.59 seconds
+----------------------------------------
+Noise: snow | Severity: 2 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 11.88}
+Time: 103.88 seconds
+----------------------------------------
+Noise: snow | Severity: 2 | Model: fastsam | Results: {'Iou': 0.61, 'Dice': 0.7, 'Precision': 0.66, 'Recall': 0.85, 'HD95': 55.41}
+Time: 19.70 seconds
+----------------------------------------
+Noise: snow | Severity: 2 | Model: mobilesam | Results: {'Iou': 0.74, 'Dice': 0.83, 'Precision': 0.78, 'Recall': 0.93, 'HD95': 22.69}
+Time: 16.83 seconds
+----------------------------------------
+Noise: snow | Severity: 3 | Model: sam1 | Results: {'Iou': 0.79, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 16.04}
+Time: 62.43 seconds
+----------------------------------------
+Noise: snow | Severity: 3 | Model: sam2 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.95, 'HD95': 11.67}
+Time: 30.55 seconds
+----------------------------------------
+Noise: snow | Severity: 3 | Model: sam3 | Results: {'Iou': 0.78, 'Dice': 0.85, 'Precision': 0.82, 'Recall': 0.93, 'HD95': 13.25}
+Time: 102.71 seconds
+----------------------------------------
+Noise: snow | Severity: 3 | Model: fastsam | Results: {'Iou': 0.58, 'Dice': 0.66, 'Precision': 0.62, 'Recall': 0.84, 'HD95': 66.18}
+Time: 20.69 seconds
+----------------------------------------
+Noise: snow | Severity: 3 | Model: mobilesam | Results: {'Iou': 0.74, 'Dice': 0.83, 'Precision': 0.77, 'Recall': 0.94, 'HD95': 22.55}
+Time: 19.46 seconds
+----------------------------------------
+Noise: snow | Severity: 4 | Model: sam1 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.93, 'HD95': 17.2}
+Time: 65.72 seconds
+----------------------------------------
+Noise: snow | Severity: 4 | Model: sam2 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.81, 'Recall': 0.95, 'HD95': 11.72}
+Time: 27.83 seconds
+----------------------------------------
+Noise: snow | Severity: 4 | Model: sam3 | Results: {'Iou': 0.78, 'Dice': 0.85, 'Precision': 0.82, 'Recall': 0.93, 'HD95': 13.28}
+Time: 95.34 seconds
+----------------------------------------
+Noise: snow | Severity: 4 | Model: fastsam | Results: {'Iou': 0.56, 'Dice': 0.65, 'Precision': 0.61, 'Recall': 0.82, 'HD95': 71.45}
+Time: 17.55 seconds
+----------------------------------------
+Noise: snow | Severity: 4 | Model: mobilesam | Results: {'Iou': 0.71, 'Dice': 0.81, 'Precision': 0.75, 'Recall': 0.93, 'HD95': 25.42}
+Time: 15.88 seconds
+----------------------------------------
+Noise: snow | Severity: 5 | Model: sam1 | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.81, 'Recall': 0.92, 'HD95': 18.45}
+Time: 63.62 seconds
+----------------------------------------
+Noise: snow | Severity: 5 | Model: sam2 | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 14.32}
+Time: 30.53 seconds
+----------------------------------------
+Noise: snow | Severity: 5 | Model: sam3 | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.93, 'HD95': 13.02}
+Time: 95.87 seconds
+----------------------------------------
+Noise: snow | Severity: 5 | Model: fastsam | Results: {'Iou': 0.55, 'Dice': 0.63, 'Precision': 0.6, 'Recall': 0.82, 'HD95': 75.63}
+Time: 17.07 seconds
+----------------------------------------
+Noise: snow | Severity: 5 | Model: mobilesam | Results: {'Iou': 0.69, 'Dice': 0.79, 'Precision': 0.74, 'Recall': 0.92, 'HD95': 27.64}
+Time: 17.33 seconds
+----------------------------------------
+Noise: brightness | Severity: 1 | Model: sam1 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.93}
+Time: 69.62 seconds
+----------------------------------------
+Noise: brightness | Severity: 1 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.96, 'HD95': 10.28}
+Time: 31.94 seconds
+----------------------------------------
+Noise: brightness | Severity: 1 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.26}
+Time: 99.00 seconds
+----------------------------------------
+Noise: brightness | Severity: 1 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.86, 'HD95': 39.77}
+Time: 22.71 seconds
+----------------------------------------
+Noise: brightness | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 17.4}
+Time: 20.43 seconds
+----------------------------------------
+Noise: brightness | Severity: 2 | Model: sam1 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 13.36}
+Time: 68.19 seconds
+----------------------------------------
+Noise: brightness | Severity: 2 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.95, 'HD95': 10.63}
+Time: 32.76 seconds
+----------------------------------------
+Noise: brightness | Severity: 2 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.34}
+Time: 100.00 seconds
+----------------------------------------
+Noise: brightness | Severity: 2 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.87, 'HD95': 38.97}
+Time: 25.13 seconds
+----------------------------------------
+Noise: brightness | Severity: 2 | Model: mobilesam | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.93, 'HD95': 17.75}
+Time: 20.14 seconds
+----------------------------------------
+Noise: brightness | Severity: 3 | Model: sam1 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.85, 'Recall': 0.94, 'HD95': 13.97}
+Time: 68.84 seconds
+----------------------------------------
+Noise: brightness | Severity: 3 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.95, 'HD95': 10.62}
+Time: 34.43 seconds
+----------------------------------------
+Noise: brightness | Severity: 3 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.79}
+Time: 100.58 seconds
+----------------------------------------
+Noise: brightness | Severity: 3 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.87, 'HD95': 39.38}
+Time: 24.83 seconds
+----------------------------------------
+Noise: brightness | Severity: 3 | Model: mobilesam | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.8, 'Recall': 0.93, 'HD95': 18.64}
+Time: 23.55 seconds
+----------------------------------------
+Noise: brightness | Severity: 4 | Model: sam1 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.85, 'Recall': 0.93, 'HD95': 14.65}
+Time: 68.85 seconds
+----------------------------------------
+Noise: brightness | Severity: 4 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 11.05}
+Time: 33.45 seconds
+----------------------------------------
+Noise: brightness | Severity: 4 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.93, 'HD95': 10.87}
+Time: 100.74 seconds
+----------------------------------------
+Noise: brightness | Severity: 4 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.86, 'HD95': 39.93}
+Time: 23.78 seconds
+----------------------------------------
+Noise: brightness | Severity: 4 | Model: mobilesam | Results: {'Iou': 0.76, 'Dice': 0.84, 'Precision': 0.79, 'Recall': 0.93, 'HD95': 19.08}
+Time: 19.66 seconds
+----------------------------------------
+Noise: brightness | Severity: 5 | Model: sam1 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.85, 'Recall': 0.93, 'HD95': 14.96}
+Time: 67.69 seconds
+----------------------------------------
+Noise: brightness | Severity: 5 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 10.81}
+Time: 32.31 seconds
+----------------------------------------
+Noise: brightness | Severity: 5 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.93, 'HD95': 11.23}
+Time: 100.85 seconds
+----------------------------------------
+Noise: brightness | Severity: 5 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.86, 'HD95': 40.46}
+Time: 23.31 seconds
+----------------------------------------
+Noise: brightness | Severity: 5 | Model: mobilesam | Results: {'Iou': 0.75, 'Dice': 0.83, 'Precision': 0.78, 'Recall': 0.93, 'HD95': 20.74}
+Time: 20.02 seconds
+----------------------------------------
+Noise: contrast | Severity: 1 | Model: sam1 | Results: {'Iou': 0.82, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.37}
+Time: 61.90 seconds
+----------------------------------------
+Noise: contrast | Severity: 1 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.96, 'HD95': 9.78}
+Time: 27.01 seconds
+----------------------------------------
+Noise: contrast | Severity: 1 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.67}
+Time: 94.44 seconds
+----------------------------------------
+Noise: contrast | Severity: 1 | Model: fastsam | Results: {'Iou': 0.67, 'Dice': 0.75, 'Precision': 0.7, 'Recall': 0.87, 'HD95': 40.09}
+Time: 17.92 seconds
+----------------------------------------
+Noise: contrast | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 16.8}
+Time: 14.51 seconds
+----------------------------------------
+Noise: contrast | Severity: 2 | Model: sam1 | Results: {'Iou': 0.82, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.45}
+Time: 61.77 seconds
+----------------------------------------
+Noise: contrast | Severity: 2 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.95, 'HD95': 9.86}
+Time: 25.34 seconds
+----------------------------------------
+Noise: contrast | Severity: 2 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.54}
+Time: 93.32 seconds
+----------------------------------------
+Noise: contrast | Severity: 2 | Model: fastsam | Results: {'Iou': 0.67, 'Dice': 0.75, 'Precision': 0.71, 'Recall': 0.87, 'HD95': 39.69}
+Time: 15.57 seconds
+----------------------------------------
+Noise: contrast | Severity: 2 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 16.95}
+Time: 13.02 seconds
+----------------------------------------
+Noise: contrast | Severity: 3 | Model: sam1 | Results: {'Iou': 0.82, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.46}
+Time: 63.69 seconds
+----------------------------------------
+Noise: contrast | Severity: 3 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.96, 'HD95': 10.22}
+Time: 27.32 seconds
+----------------------------------------
+Noise: contrast | Severity: 3 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.57}
+Time: 93.41 seconds
+----------------------------------------
+Noise: contrast | Severity: 3 | Model: fastsam | Results: {'Iou': 0.67, 'Dice': 0.75, 'Precision': 0.71, 'Recall': 0.87, 'HD95': 39.81}
+Time: 15.82 seconds
+----------------------------------------
+Noise: contrast | Severity: 3 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 16.7}
+Time: 12.51 seconds
+----------------------------------------
+Noise: contrast | Severity: 4 | Model: sam1 | Results: {'Iou': 0.82, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.65}
+Time: 60.86 seconds
+----------------------------------------
+Noise: contrast | Severity: 4 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.95, 'HD95': 10.38}
+Time: 26.12 seconds
+----------------------------------------
+Noise: contrast | Severity: 4 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.93, 'HD95': 10.71}
+Time: 93.26 seconds
+----------------------------------------
+Noise: contrast | Severity: 4 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.74, 'Precision': 0.7, 'Recall': 0.87, 'HD95': 41.68}
+Time: 15.88 seconds
+----------------------------------------
+Noise: contrast | Severity: 4 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 16.09}
+Time: 13.05 seconds
+----------------------------------------
+Noise: contrast | Severity: 5 | Model: sam1 | Results: {'Iou': 0.82, 'Dice': 0.88, 'Precision': 0.86, 'Recall': 0.94, 'HD95': 11.75}
+Time: 61.58 seconds
+----------------------------------------
+Noise: contrast | Severity: 5 | Model: sam2 | Results: {'Iou': 0.81, 'Dice': 0.88, 'Precision': 0.84, 'Recall': 0.95, 'HD95': 10.16}
+Time: 25.22 seconds
+----------------------------------------
+Noise: contrast | Severity: 5 | Model: sam3 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 10.52}
+Time: 95.68 seconds
+----------------------------------------
+Noise: contrast | Severity: 5 | Model: fastsam | Results: {'Iou': 0.66, 'Dice': 0.75, 'Precision': 0.7, 'Recall': 0.88, 'HD95': 40.22}
+Time: 16.01 seconds
+----------------------------------------
+Noise: contrast | Severity: 5 | Model: mobilesam | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 16.23}
+Time: 15.28 seconds
+----------------------------------------
+Noise: jpeg | Severity: 1 | Model: sam1 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.84, 'Recall': 0.94, 'HD95': 12.74}
+Time: 59.50 seconds
+----------------------------------------
+Noise: jpeg | Severity: 1 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.82, 'Recall': 0.96, 'HD95': 10.25}
+Time: 26.44 seconds
+----------------------------------------
+Noise: jpeg | Severity: 1 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.87, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 10.23}
+Time: 93.87 seconds
+----------------------------------------
+Noise: jpeg | Severity: 1 | Model: fastsam | Results: {'Iou': 0.62, 'Dice': 0.71, 'Precision': 0.66, 'Recall': 0.85, 'HD95': 48.27}
+Time: 15.38 seconds
+----------------------------------------
+Noise: jpeg | Severity: 1 | Model: mobilesam | Results: {'Iou': 0.73, 'Dice': 0.82, 'Precision': 0.76, 'Recall': 0.94, 'HD95': 21.83}
+Time: 13.58 seconds
+----------------------------------------
+Noise: jpeg | Severity: 2 | Model: sam1 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 14.78}
+Time: 60.04 seconds
+----------------------------------------
+Noise: jpeg | Severity: 2 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.82, 'Recall': 0.97, 'HD95': 10.3}
+Time: 23.95 seconds
+----------------------------------------
+Noise: jpeg | Severity: 2 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.83, 'Recall': 0.94, 'HD95': 11.06}
+Time: 92.53 seconds
+----------------------------------------
+Noise: jpeg | Severity: 2 | Model: fastsam | Results: {'Iou': 0.6, 'Dice': 0.68, 'Precision': 0.65, 'Recall': 0.83, 'HD95': 57.5}
+Time: 14.87 seconds
+----------------------------------------
+Noise: jpeg | Severity: 2 | Model: mobilesam | Results: {'Iou': 0.72, 'Dice': 0.81, 'Precision': 0.74, 'Recall': 0.94, 'HD95': 23.52}
+Time: 12.33 seconds
+----------------------------------------
+Noise: jpeg | Severity: 3 | Model: sam1 | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.93, 'HD95': 17.39}
+Time: 61.32 seconds
+----------------------------------------
+Noise: jpeg | Severity: 3 | Model: sam2 | Results: {'Iou': 0.8, 'Dice': 0.87, 'Precision': 0.82, 'Recall': 0.97, 'HD95': 10.27}
+Time: 27.24 seconds
+----------------------------------------
+Noise: jpeg | Severity: 3 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 10.51}
+Time: 93.86 seconds
+----------------------------------------
+Noise: jpeg | Severity: 3 | Model: fastsam | Results: {'Iou': 0.57, 'Dice': 0.66, 'Precision': 0.62, 'Recall': 0.83, 'HD95': 66.2}
+Time: 14.92 seconds
+----------------------------------------
+Noise: jpeg | Severity: 3 | Model: mobilesam | Results: {'Iou': 0.7, 'Dice': 0.8, 'Precision': 0.73, 'Recall': 0.95, 'HD95': 25.92}
+Time: 13.57 seconds
+----------------------------------------
+Noise: jpeg | Severity: 4 | Model: sam1 | Results: {'Iou': 0.73, 'Dice': 0.82, 'Precision': 0.77, 'Recall': 0.93, 'HD95': 22.22}
+Time: 60.02 seconds
+----------------------------------------
+Noise: jpeg | Severity: 4 | Model: sam2 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.81, 'Recall': 0.96, 'HD95': 10.5}
+Time: 26.08 seconds
+----------------------------------------
+Noise: jpeg | Severity: 4 | Model: sam3 | Results: {'Iou': 0.79, 'Dice': 0.86, 'Precision': 0.82, 'Recall': 0.94, 'HD95': 10.57}
+Time: 93.30 seconds
+----------------------------------------
+Noise: jpeg | Severity: 4 | Model: fastsam | Results: {'Iou': 0.52, 'Dice': 0.62, 'Precision': 0.6, 'Recall': 0.81, 'HD95': 80.35}
+Time: 14.37 seconds
+----------------------------------------
+Noise: jpeg | Severity: 4 | Model: mobilesam | Results: {'Iou': 0.66, 'Dice': 0.77, 'Precision': 0.69, 'Recall': 0.94, 'HD95': 30.71}
+Time: 13.09 seconds
+----------------------------------------
+Noise: jpeg | Severity: 5 | Model: sam1 | Results: {'Iou': 0.68, 'Dice': 0.78, 'Precision': 0.71, 'Recall': 0.93, 'HD95': 28.72}
+Time: 60.82 seconds
+----------------------------------------
+Noise: jpeg | Severity: 5 | Model: sam2 | Results: {'Iou': 0.78, 'Dice': 0.86, 'Precision': 0.8, 'Recall': 0.96, 'HD95': 11.89}
+Time: 24.06 seconds
+----------------------------------------
+Noise: jpeg | Severity: 5 | Model: sam3 | Results: {'Iou': 0.77, 'Dice': 0.85, 'Precision': 0.81, 'Recall': 0.94, 'HD95': 11.23}
+Time: 91.88 seconds
+----------------------------------------
+Noise: jpeg | Severity: 5 | Model: fastsam | Results: {'Iou': 0.46, 'Dice': 0.56, 'Precision': 0.53, 'Recall': 0.8, 'HD95': 100.89}
+Time: 13.76 seconds
+----------------------------------------
+Noise: jpeg | Severity: 5 | Model: mobilesam | Results: {'Iou': 0.62, 'Dice': 0.74, 'Precision': 0.64, 'Recall': 0.96, 'HD95': 35.25}
+Time: 12.05 seconds
+----------------------------------------
+Saved results to results.json

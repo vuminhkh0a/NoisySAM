@@ -26,7 +26,7 @@ class Custom_Dataset(Dataset):
         mask_path = self.masks[i]
         mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
 
-        return np.astype(image, np.float32), np.astype(mask, np.float32)
+        return np.astype(image, np.float32), np.astype(mask, np.float32), image_path, mask_path
     
 
 
@@ -35,26 +35,13 @@ def get_VOC2012():
     image_paths = os.path.join(VOC_PATH, 'JPEGImages')
     mask_paths = os.path.join(VOC_PATH, 'SegmentationObject')
 
-    img_path_lst = []
-    mask_path_lst = []
+    x = []
+    y = []
 
-    with open('./data/VOC2012/ImageSets/Segmentation/train.txt', 'r') as f:
-        for line in f:
-            img_path_lst.append(line.strip() + '.jpg')
-            mask_path_lst.append(line.strip() + '.png')
-
-    with open('./data/VOC2012/ImageSets/Segmentation/trainval.txt', 'r') as f:
-        for line in f:
-            img_path_lst.append(line.strip() + '.jpg')
-            mask_path_lst.append(line.strip() + '.png')
-
-    with open('./data/VOC2012/ImageSets/Segmentation/val.txt', 'r') as f:
-        for line in f:
-            img_path_lst.append(line.strip() + '.jpg')
-            mask_path_lst.append(line.strip() + '.png')
-
-    x = sorted([os.path.join(image_paths, image_path_i) for image_path_i in img_path_lst])
-    y = sorted([os.path.join(mask_paths, mask_path_i) for mask_path_i in mask_path_lst])
+    for img_path_i, mask_path_i in zip(sorted(os.listdir(image_paths)), sorted(os.listdir(mask_paths))):
+        x.append(os.path.join(image_paths, img_path_i))
+        y.append(os.path.join(mask_paths, mask_path_i))
+    
     return x, y
 
 def get_BSDS500():
@@ -86,11 +73,10 @@ def get_stanford_background():
 
     return x, y
 
-def get_dataset(dataset_name, path_only):
+def get_dataset(dataset_name):
     get_path = {'VOC2012':get_VOC2012, 'BSDS500': get_BSDS500, 'stanford-background': get_stanford_background}
     x, y = get_path[dataset_name]()
-    if path_only:
-        return x, y
+    
     return Custom_Dataset(x, y)
 
 

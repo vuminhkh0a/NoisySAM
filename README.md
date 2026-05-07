@@ -20,35 +20,43 @@ The following foundation models are currently evaluated:
 
 ## Noise and Transformations
 
-Various perturbations are applied to the input images using Albumentations:
+The following perturbations are implemented using Albumentations. Each transformation is applied with `p=1.0` inside its respective pipeline.
 
 ### Geometric Transformations
-- Horizontal + Vertical Flip
-- Rotation
-- RandomRotate90
-- Random Scale
-- Translation (Shift)
+- **Flip**
+  - `HorizontalFlip`
+  - `VerticalFlip`
+- **Rotation**
+  - `Rotate (limit=45°)`
+  - `RandomRotate90`
+- **Scaling**
+  - `RandomScale (scale_limit=0.3)`
+- **Translation**
+  - `ShiftScaleRotate (shift_limit=0.1, scale_limit=0, rotate_limit=0)`
 
 ### Noise Injection
-- Gaussian Noise
-- ISO Noise
+- `GaussNoise`
+- `ISONoise`
 
 ### Color Transformations
-- Hue / Saturation Shift
-- RGB Shift
+- `HueSaturationValue`
+- `RGBShift`
 
 ### Contrast and Illumination
-- Random Brightness / Contrast
-- Gamma Adjustment
+- `RandomBrightnessContrast`
+- `RandomGamma`
 
 ### Image Enhancement
-- Sharpen
+- `Sharpen`
 
+### No Transformation
+- Identity pipeline (`A.Compose([])`) for baseline comparison
+  
 ## Inference Strategy
 
 The segmentation models are prompted using sampled points extracted from the ground-truth mask.
 
-Point selection strategy:
+Point prompt selection strategy:
 
 1. Split the original segmentation mask into binary masks for each class in the image.
 2. For each binary mask, apply connected component labeling to identify individual regions.
@@ -60,7 +68,7 @@ Example implementation:
 
 ```python
 def sample_points(mask):
-    labeled_mask, num_regions = ndimage.label(mask)
+    labeled_mask, num_regions = ndimage.label(mask == 1)
     points = []
     for region_id in range(1, num_regions + 1):
         region = labeled_mask == region_id
@@ -70,6 +78,50 @@ def sample_points(mask):
 
     return np.array(points)
 ```
+
+Box prompt selection strategy:
+The box prompt strategy is also applied for each classes from the ground truth. A tight bounding box is computed from the mask and enlarge it by an expand coefficient on each side to simulate slight localization uncertainty from real-life prompt situations.
+
+```python
+def get_box_prompts(mask, expand_ratio=0.02):
+    
+    H, W = mask.shape
+    expand_x = int(W * expand_ratio)
+    expand_y = int(H * expand_ratio)
+
+    boxes = []
+
+    classes = np.unique(mask)
+
+    for cls in classes:
+        if cls:
+            binary = (mask == cls).astype(np.uint8)
+
+            num_labels, labels = cv2.connectedComponents(binary)
+
+            for i in range(1, num_labels):
+                component = (labels == i).astype(np.uint8)
+
+                ys, xs = np.where(component)
+
+                if len(xs) == 0:
+                    continue
+
+                x1, x2 = xs.min(), xs.max()
+                y1, y2 = ys.min(), ys.max()
+
+                x1 = max(0, x1 - expand_x)
+                y1 = max(0, y1 - expand_y)
+                x2 = min(W - 1, x2 + expand_x)
+                y2 = min(H - 1, y2 + expand_y)
+
+                boxes.append([x1, y1, x2, y2])
+
+    return boxes
+```
+
+## Experimental results
+![Result](./image/results?raw=true)
 
 ## Future Extensions
 

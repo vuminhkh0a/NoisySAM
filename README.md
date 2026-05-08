@@ -200,6 +200,8 @@ Example output format:
 
 # Experimental Results
 
+These results are obtained from PASCAL VOC 2012 dataset:
+
 ![Results](images/results.png)
 
 ---
